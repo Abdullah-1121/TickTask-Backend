@@ -8,8 +8,9 @@ from sqlmodel import select
 from jose import jwt , JWTError
 from todo_app.db import get_session
 from todo_app.model import RefTokenModel, TokenModel, User
+from todo_app.settings import SECRET_KEY
 
-SECRET_KEY = 'f0ef1b74b231f07f88f9ec6aaa35e903e4338d250d972d1f0286208768168768'
+
 ALGORITHYM = 'HS256'
 EXPIRY_TIME = 60
 oauth_scheme = OAuth2PasswordBearer(tokenUrl="/token")
