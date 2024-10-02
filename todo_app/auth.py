@@ -12,7 +12,7 @@ from todo_app.settings import SECRET_KEY
 
 
 ALGORITHYM = 'HS256'
-EXPIRY_TIME = 60
+EXPIRY_TIME = 3600
 oauth_scheme = OAuth2PasswordBearer(tokenUrl="/token")
 pswrd_context = CryptContext(schemes=["bcrypt"])
 def hashPassword(password : str):
@@ -48,7 +48,7 @@ def create_token (data: dict , expiry_time:timedelta|None):
     if expiry_time : 
         expire = datetime.now(timezone.utc) + expiry_time
     else :
-        expire = datetime.now(timezone.utc) + timedelta(minutes=15)   
+        expire = datetime.now(timezone.utc) + timedelta(minutes=60)   
 
     data_to_encde.update({"exp": expire})
     encoded_jwt = jwt.encode(
@@ -87,7 +87,7 @@ def  create_refresh_token(data: dict , expiry_time:timedelta|None):
     if expiry_time : 
         expire = datetime.now(timezone.utc) + expiry_time
     else :
-        expire = datetime.now(timezone.utc) + timedelta(minutes=15)   
+        expire = datetime.now(timezone.utc) + timedelta(days=7)   
 
     data_to_encde.update({"exp": expire})
     encoded_jwt = jwt.encode(

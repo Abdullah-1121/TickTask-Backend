@@ -59,6 +59,7 @@ app.add_middleware(
 expiry = timedelta( minutes=EXPIRY_TIME)
 @app.post("/token" , response_model=token)
 async def login(form_data : Annotated[OAuth2PasswordRequestForm , Depends()] , session : Annotated[Session , Depends(get_session)]):
+   print(form_data.username)
    user =  login_user(username=form_data.username , password=form_data.password , session=session)
    if not user:
        raise HTTPException(status_code=409 , detail="Invalid Email or Username")
